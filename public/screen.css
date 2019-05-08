@@ -9,4 +9,19 @@ html {
 body {
   margin: 0;
   min-height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 14%;
+}
+.deck-up {
+  border: solid;
+  border-width: 2%;
+  height: 20rem;
+  width: 14rem;
+  margin: 10%;
+}
+
+.card-front {
+  text-align: center;
+  font-size: 4rem;
 }
