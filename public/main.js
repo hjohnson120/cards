@@ -1,34 +1,36 @@
 const suits = ['hearts', 'spades', 'diamonds', 'clubs']
 const faces = [
-  'ace',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  'jack',
-  'queen',
-  'king'
+  { rank: 'ace', value: 11 },
+  { rank: '2', value: 2 },
+  { rank: '3', value: 3 },
+  { rank: '4', value: 4 },
+  { rank: '5', value: 5 },
+  { rank: '6', value: 6 },
+  { rank: '7', value: 7 },
+  { rank: '8', value: 8 },
+  { rank: '9', value: 9 },
+  { rank: '10', value: 10 },
+  { rank: 'jack', value: 10 },
+  { rank: 'queen', value: 10 },
+  { rank: 'king', value: 10 }
 ]
 
-let deck = []
+const deck = []
 
-const main = () => {
+const createDeck = () => {
   for (let i = 0; i < faces.length; i++) {
     console.log('faces selected')
     for (let j = 0; j < suits.length; j++) {
       console.log('suits selected')
-      const finalCard = faces + ' ' + suits
-      console.log(finalCard)
-      deck.push(finalCard)
+      const card = {
+        rank: faces[i].rank,
+        value: faces[i].value,
+        suit: suits[j]
+      }
+      deck.push(card)
     }
   }
   console.log(deck)
-  shuffle()
 }
 
 const shuffle = () => {
@@ -38,12 +40,20 @@ const shuffle = () => {
     deck[i] = deck[j]
     deck[j] = x
   }
-  console.log('shuffle')
+  console.log(deck)
 }
 
-let cardButton = () => {
-  document.querySelector('.button').textContent = deck[0]
+const dealCard = () => {
+  const firstCard = deck[0]
+  console.log(firstCard)
+  document.querySelector('.card-front').textContent =
+    firstCard.rank +
+    ' of ' +
+    firstCard.suit +
+    ' has a value of ' +
+    firstCard.value
 }
 
-document.addEventListener('DOMContentLoaded', main)
-document.addEventListener('click', cardButton)
+document.addEventListener('DOMContentLoaded', createDeck)
+document.querySelector('.shuffle').addEventListener('click', shuffle)
+document.querySelector('.deal').addEventListener('click', dealCard)
