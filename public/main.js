@@ -15,6 +15,8 @@ const faces = [
   { rank: 'king', value: 10 }
 ]
 
+const playerHand = []
+const dealerHand = []
 const deck = []
 
 const createDeck = () => {
@@ -43,7 +45,7 @@ const shuffle = () => {
   console.log(deck)
 }
 
-const dealCard = () => {
+const dealOneCardToPlayer = () => {
   const firstCard = deck[0]
   console.log(firstCard)
   document.querySelector('.card-front').textContent =
@@ -54,6 +56,12 @@ const dealCard = () => {
     firstCard.value
 }
 
-document.addEventListener('DOMContentLoaded', createDeck)
+const main = () => {
+  createDeck()
+  shuffle()
+  dealOneCardToPlayer()
+}
+
+document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.shuffle').addEventListener('click', shuffle)
-document.querySelector('.deal').addEventListener('click', dealCard)
+document.querySelector('.deal').addEventListener('click', dealOneCardToPlayer)
