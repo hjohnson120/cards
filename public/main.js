@@ -27,8 +27,8 @@ const createDeck = () => {
       const card = {
         rank: faces[i].rank,
         value: faces[i].value,
-        suit: suits[j]
-        // imgUrl:
+        suit: suits[j],
+        imgUrl: '/cards/' + faces[i].rank + '_of_' + suits[j] + '.svg'
       }
       deck.push(card)
     }
@@ -47,31 +47,36 @@ const shuffle = () => {
 }
 
 const dealOneCardToPlayer = () => {
-  const firstCard = deck[0]
+  const firstCard = deck.pop()
   console.log(firstCard)
-  document.querySelector('.card-front').textContent =
-    firstCard.rank +
-    ' of ' +
-    firstCard.suit +
-    ' has a value of ' +
-    firstCard.value
+  const imageTag = document.createElement('img')
+  imageTag.src = firstCard.imgUrl
+  document.querySelector('.card-front').appendChild(imageTag)
+  playerHand.push(firstCard)
 }
 
-// const c = deck.pop
-// document.querySelector('.hit').textContent =
-//   firstCard.rank +
-//   ' of ' +
-//   firstCard.suit +
-//   ' has a value of ' +
-//   firstCard.value
-// playerHand.push(c)
+const dealOneCardToDealer = () => {
+  const firstCard = deck.pop()
+  // const imageTag = document.createElement('img')
+  // imageTag.src = firstCard.imgUrl
+  // document.querySelector('.dealer-card').appendChild(imageTag)
+  dealerHand.push(firstCard)
+  console.log(firstCard)
+}
 
 const main = () => {
   createDeck()
   shuffle()
   dealOneCardToPlayer()
+  dealOneCardToDealer()
+  dealOneCardToDealer()
 }
+
+// const reset = () => {
+
+// }
 
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.shuffle').addEventListener('click', shuffle)
 document.querySelector('.hit').addEventListener('click', dealOneCardToPlayer)
+// document.querySelector('.reset').addEventListener('click', reset)

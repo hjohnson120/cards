@@ -13,6 +13,7 @@ body {
   justify-content: space-between;
   padding: 14%;
 }
+
 .deck-up {
   border: solid;
   border-width: 2%;
@@ -24,4 +25,11 @@ body {
 .card-front {
   text-align: center;
   font-size: 3rem;
+}
+img {
+  width: 200px;
+  height: 300px;
+}
+h1 {
+  margin: 30%;
 }
