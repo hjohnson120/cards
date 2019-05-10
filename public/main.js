@@ -64,9 +64,14 @@ const dealOneCardToDealer = () => {
   console.log(firstCard)
 }
 
+const standSelected = () => {
+  document.querySelector('.hit').disabled = true
+}
+
 const main = () => {
   createDeck()
   shuffle()
+  dealOneCardToPlayer()
   dealOneCardToPlayer()
   dealOneCardToDealer()
   dealOneCardToDealer()
@@ -79,4 +84,5 @@ const main = () => {
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.shuffle').addEventListener('click', shuffle)
 document.querySelector('.hit').addEventListener('click', dealOneCardToPlayer)
+document.querySelector('.stand').addEventListener('click', standSelected)
 // document.querySelector('.reset').addEventListener('click', reset)
