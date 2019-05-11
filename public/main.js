@@ -57,15 +57,16 @@ const dealOneCardToPlayer = () => {
 
 const dealOneCardToDealer = () => {
   const firstCard = deck.pop()
-  // const imageTag = document.createElement('img')
-  // imageTag.src = firstCard.imgUrl
-  // document.querySelector('.dealer-card').appendChild(imageTag)
   dealerHand.push(firstCard)
   console.log(firstCard)
 }
 
 const standSelected = () => {
   document.querySelector('.hit').disabled = true
+  const playerHandSum = () => playerHand.reduce((a, b) => a + b.value, 0)
+  const total = playerHandSum(playerHand)
+  document.querySelector('.player-total').textContent = total
+  console.log(total)
 }
 
 const main = () => {
