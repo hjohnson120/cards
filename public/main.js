@@ -65,18 +65,26 @@ const standSelected = () => {
   const dealerTotal = dealerHandSum(dealerHand)
   document.querySelector('.dealer-total').textContent = dealerTotal
   console.log(dealerTotal)
-  for (i; i < dealerHand.length; i++) {
-    const imageTag = document.createElement('img')
-    dealerHand = dealerHand[i]
-    document.querySelector('.dealer-cards').appendChild(imageTag)
+  let result = document.querySelector('.result')
+  if (dealerHandSum > 21) {
+    result = 'Dealer Bust!'
+  } else if (playerHandSum > 21) {
+    result = 'Player Bust'
+  } else if (dealerHandSum > playerHandSum) {
+    result = 'Dealer WINS!'
+  } else if (playerHandSum > dealerHandSum) {
+    result = 'Player Wins!'
+    console.log(result)
   }
 }
+
 const dealOneCardToDealer = () => {
   const firstCard = deck.pop()
   dealerHand.push(firstCard)
   console.log(firstCard)
   const dealerCards = () => {
     document.querySelector('.hit').disabled = true
+  }
 }
 
 const main = () => {
