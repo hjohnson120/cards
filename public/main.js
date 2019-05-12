@@ -16,7 +16,7 @@ const faces = [
 ]
 
 const playerHand = []
-const dealerHand = []
+let dealerHand = []
 const deck = []
 
 const createDeck = () => {
@@ -55,18 +55,28 @@ const dealOneCardToPlayer = () => {
   playerHand.push(firstCard)
 }
 
-const dealOneCardToDealer = () => {
-  const firstCard = deck.pop()
-  dealerHand.push(firstCard)
-  console.log(firstCard)
-}
-
 const standSelected = () => {
   document.querySelector('.hit').disabled = true
   const playerHandSum = () => playerHand.reduce((a, b) => a + b.value, 0)
   const total = playerHandSum(playerHand)
   document.querySelector('.player-total').textContent = total
   console.log(total)
+  const dealerHandSum = () => dealerHand.reduce((a, b) => a + b.value, 0)
+  const dealerTotal = dealerHandSum(dealerHand)
+  document.querySelector('.dealer-total').textContent = dealerTotal
+  console.log(dealerTotal)
+  for (i; i < dealerHand.length; i++) {
+    const imageTag = document.createElement('img')
+    dealerHand = dealerHand[i]
+    document.querySelector('.dealer-cards').appendChild(imageTag)
+  }
+}
+const dealOneCardToDealer = () => {
+  const firstCard = deck.pop()
+  dealerHand.push(firstCard)
+  console.log(firstCard)
+  const dealerCards = () => {
+    document.querySelector('.hit').disabled = true
 }
 
 const main = () => {
@@ -86,4 +96,5 @@ document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.shuffle').addEventListener('click', shuffle)
 document.querySelector('.hit').addEventListener('click', dealOneCardToPlayer)
 document.querySelector('.stand').addEventListener('click', standSelected)
+
 // document.querySelector('.reset').addEventListener('click', reset)
