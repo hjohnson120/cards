@@ -18,6 +18,8 @@ const faces = [
 const playerHand = []
 let dealerHand = []
 const deck = []
+const dealerSum = []
+const playerSum = []
 
 const createDeck = () => {
   for (let i = 0; i < faces.length; i++) {
@@ -55,36 +57,30 @@ const dealOneCardToPlayer = () => {
   playerHand.push(firstCard)
 }
 
-const standSelected = () => {
-  document.querySelector('.hit').disabled = true
-  const playerHandSum = () => playerHand.reduce((a, b) => a + b.value, 0)
-  const total = playerHandSum(playerHand)
-  document.querySelector('.player-total').textContent = total
-  console.log(total)
-  const dealerHandSum = () => dealerHand.reduce((a, b) => a + b.value, 0)
-  const dealerTotal = dealerHandSum(dealerHand)
-  document.querySelector('.dealer-total').textContent = dealerTotal
-  console.log(dealerTotal)
-  let result = document.querySelector('.result')
-  if (dealerHandSum > 21) {
-    result = 'Dealer Bust!'
-  } else if (playerHandSum > 21) {
-    result = 'Player Bust'
-  } else if (dealerHandSum > playerHandSum) {
-    result = 'Dealer WINS!'
-  } else if (playerHandSum > dealerHandSum) {
-    result = 'Player Wins!'
-    console.log(result)
-  }
-}
-
 const dealOneCardToDealer = () => {
   const firstCard = deck.pop()
   dealerHand.push(firstCard)
   console.log(firstCard)
   const dealerCards = () => {
     document.querySelector('.hit').disabled = true
+    // while (dealerSum[i] < 17) {
+    //   dealOneCardToDealer()
+    // }
   }
+}
+
+const standSelected = () => {
+  document.querySelector('.hit').disabled = true
+  const playerHandSum = () => playerHand.reduce((a, b) => a + b.value, 0)
+  const total = playerHandSum(playerHand)
+  document.querySelector('.player-total').textContent = total
+  console.log(total)
+  playerSum.push(playerHandSum)
+  const dealerHandSum = () => dealerHand.reduce((a, b) => a + b.value, 0)
+  const dealerTotal = dealerHandSum(dealerHand)
+  document.querySelector('.dealer-total').textContent = dealerTotal
+  console.log(dealerTotal)
+  dealerSum.push(dealerHandSum)
 }
 
 const main = () => {
@@ -104,5 +100,6 @@ document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.shuffle').addEventListener('click', shuffle)
 document.querySelector('.hit').addEventListener('click', dealOneCardToPlayer)
 document.querySelector('.stand').addEventListener('click', standSelected)
+// document.querySelector('.result').textContent = result
 
 // document.querySelector('.reset').addEventListener('click', reset)
