@@ -15,11 +15,9 @@ const faces = [
   { rank: 'king', value: 10 }
 ]
 
-const playerHand = []
+let playerHand = []
 let dealerHand = []
-const deck = []
-const dealerSum = []
-const playerSum = []
+let deck = []
 
 const createDeck = () => {
   for (let i = 0; i < faces.length; i++) {
@@ -48,6 +46,20 @@ const shuffle = () => {
   console.log(deck)
 }
 
+let playerHandSum = () => {
+  playerHand.reduce((a, b) => a + b.value, 0)
+  const total = playerHandSum(playerHand)
+  document.querySelector('.player-total').textContent = total
+  console.log(total)
+}
+
+let dealerHandSum = () => {
+  dealerHand.reduce((a, b) => a + b.value, 0)
+  const dealerTotal = dealerHandSum(dealerHand)
+  document.querySelector('.dealer-total').textContent = dealerTotal
+  console.log(dealerTotal)
+}
+
 const dealOneCardToPlayer = () => {
   const firstCard = deck.pop()
   console.log(firstCard)
@@ -61,26 +73,41 @@ const dealOneCardToDealer = () => {
   const firstCard = deck.pop()
   dealerHand.push(firstCard)
   console.log(firstCard)
-  const dealerCards = () => {
-    document.querySelector('.hit').disabled = true
-    // while (dealerSum[i] < 17) {
-    //   dealOneCardToDealer()
-    // }
+  const imageTag = document.createElement('img')
+  imageTag.src = 'card-back.jpg'
+  document.querySelector('.dealer-card').appendChild(imageTag)
+}
+
+const showDealerHand = () => {
+  document.querySelector('.dealer-card').textContent = ''
+  for (let i = 0; i < dealerHand.length; i++) {
+    const card = dealerHand[i]
+    const img = document.createElement('img')
+    img.src = card.imageUrl
+    document.querySelector('.dealer-card').appendChild(img)
   }
 }
 
 const standSelected = () => {
   document.querySelector('.hit').disabled = true
-  const playerHandSum = () => playerHand.reduce((a, b) => a + b.value, 0)
-  const total = playerHandSum(playerHand)
-  document.querySelector('.player-total').textContent = total
-  console.log(total)
-  playerSum.push(playerHandSum)
-  const dealerHandSum = () => dealerHand.reduce((a, b) => a + b.value, 0)
-  const dealerTotal = dealerHandSum(dealerHand)
-  document.querySelector('.dealer-total').textContent = dealerTotal
-  console.log(dealerTotal)
-  dealerSum.push(dealerHandSum)
+}
+
+const displayMessage = message => {
+  document.querySelector('.message').textContent = message
+}
+while (dealerHandSum < 17) {
+  dealOneCardToDealer()
+  showDealerHand()
+}
+
+if (dealerHandSum > 21) {
+  displayMessage('Busted!')
+} else if (dealerHandSum < 17) {
+  dealOneCardToDealer()
+} else if (playerHandSum > dealerHandSum) {
+  displayMessage('Player Wins!')
+} else if (dealerHandSum > playerHandSum) {
+  displayMessage('Dealer Wins!')
 }
 
 const main = () => {
