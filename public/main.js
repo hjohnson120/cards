@@ -102,8 +102,6 @@ while (dealerHandSum < 17) {
 
 if (dealerHandSum > 21) {
   displayMessage('Busted!')
-} else if (dealerHandSum < 17) {
-  dealOneCardToDealer()
 } else if (playerHandSum > dealerHandSum) {
   displayMessage('Player Wins!')
 } else if (dealerHandSum > playerHandSum) {
