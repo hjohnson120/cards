@@ -72,7 +72,6 @@ const dealOneCardToPlayer = () => {
   if (playerHandSum() > 21) {
     document.querySelector('.hit').disabled = true
     displayMessage('Busted! Dealer Wins!')
-    showDealerHand()
   }
 }
 
@@ -89,8 +88,8 @@ const showDealerHand = () => {
   document.querySelector('.dealer-card').textContent = ''
   for (let i = 0; i < dealerHand.length; i++) {
     const card = dealerHand[i]
-    const imageTag = document.createElement('img')
-    imageTag.src = card.imageUrl
+    const img = document.createElement('img')
+    img.src = card.imageUrl
     document.querySelector('.dealer-card').appendChild(img)
   }
 }
@@ -116,10 +115,27 @@ const displayMessage = message => {
   document.querySelector('.message').textContent = message
 }
 
+const playAgain = () => {
+  deck = []
+  playerHand = []
+  dealerHand = []
+  playerHandSum = 0
+  dealerHandSum = 0
+  document.querySelector('.player-total').textContent = ''
+  document.querySelector('.dealer-total').textContent = ''
+  createDeck()
+  shuffle()
+  dealOneCardToPlayer()
+  dealOneCardToPlayer()
+  dealOneCardToDealer()
+  dealOneCardToDealer()
+}
+
 const main = () => {
   document.querySelector('.shuffle').addEventListener('click', shuffle)
   document.querySelector('.hit').addEventListener('click', dealOneCardToPlayer)
   document.querySelector('.stand').addEventListener('click', standSelected)
+  document.querySelector('.reset').addEventListener('click', playAgain)
 
   createDeck()
   shuffle()
@@ -135,5 +151,3 @@ const main = () => {
 
 document.addEventListener('DOMContentLoaded', main)
 // document.querySelector('.result').textContent = result
-
-// document.querySelector('.reset').addEventListener('click', reset)
