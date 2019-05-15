@@ -4,11 +4,10 @@
 
 html {
   height: 100%;
-
 }
 
 body {
-  background-image: url("black-jack.jpg");
+  background-image: url('black-jack.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100%;
@@ -19,15 +18,6 @@ body {
   justify-content: space-between;
   padding: 10%;
   text-align: center;
-
-  
-
-.deck-up {
-  border: solid;
-  border-width: 2%;
-  height: 20rem;
-  width: 14rem;
-  margin: 10%;
 }
 
 .card-front {
@@ -46,4 +36,3 @@ h1 {
   display: flex;
   flex-direction: row;
 }
-
